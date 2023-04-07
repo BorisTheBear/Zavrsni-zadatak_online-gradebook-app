@@ -1,7 +1,16 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import authService from "../services/AuthService";
 
-const Navbar = ({ isAuthenticated }) => {
+const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
+  const history = useHistory();
+
+  const handleLogout = async () => {
+    const response = await authService.logout();
+    setIsAuthenticated(false);
+    history.push("/login");
+  };
+
   return (
     <div>
       <nav
@@ -59,7 +68,11 @@ const Navbar = ({ isAuthenticated }) => {
               )}
               {isAuthenticated && (
                 <li className="nav-item">
-                  <Link className="nav-link active" to="/logout">
+                  <Link
+                    className="nav-link active"
+                    to="/logout"
+                    onClick={handleLogout}
+                  >
                     Logout
                   </Link>
                 </li>

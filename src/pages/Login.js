@@ -12,7 +12,7 @@ const Login = ({ onLogin }) => {
 
   const history = useHistory();
 
-  const handleSubmit = async (event) => {
+  const handleLogin = async (event) => {
     event.preventDefault();
     setInvalidCredentials(false);
 
@@ -22,13 +22,12 @@ const Login = ({ onLogin }) => {
       history.push("/");
     } catch (error) {
       setInvalidCredentials(true);
-      alert("invalid credentials");
     }
   };
   return (
     <div>
       <h2>Login</h2>
-      <form onSubmit={handleSubmit} className="form">
+      <form className="form">
         <ul>
           <li>
             <label htmlFor="email">Email:</label>
@@ -65,7 +64,7 @@ const Login = ({ onLogin }) => {
           </li>
           <li>
             <br />
-            <button type="button" className="btn btn-warning">
+            <button type="button" className="btn btn-warning" onClick={handleLogin}>
               Log in
             </button>
           </li>

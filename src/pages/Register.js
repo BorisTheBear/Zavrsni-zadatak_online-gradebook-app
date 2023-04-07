@@ -9,22 +9,26 @@ const Register = ({ onRegister }) => {
     email: "",
     password: "",
     password_confirmed: "",
-    image_url: "",
-    terms: false,
+    image_url: ""
   });
 
   const history = useHistory();
 
+  const [agree, setAgree] = useState(false);
+
+  const checkboxHandler = () => {
+    setAgree(!agree)
+  }
+
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(userData.terms);
-    // try {
-    //     await authService.register(userData)
-    //     onRegister();
-    //     history.push("/");
-    // } catch (error) {
-    //     alert("Enter all required fields");
-    // }
+    try {
+        await authService.register(userData)
+        onRegister();
+        history.push("/");
+    } catch (error) {
+        alert("Enter all required fields");
+    }
   };
   return (
     <div>
@@ -122,17 +126,14 @@ const Register = ({ onRegister }) => {
             <input
               id="terms"
               type="checkbox"
-              checked={userData.terms || ""}
-              onChange={({ target }) => {
-                setUserData({ ...userData, terms: target.value });
-              }}
+              onChange={checkboxHandler}
               required
             />
           </li>
           <li>
             <br />
             <button
-              type="button"
+              disabled={!agree}
               className="btn btn-warning"
               onClick={handleSubmit}
             >
