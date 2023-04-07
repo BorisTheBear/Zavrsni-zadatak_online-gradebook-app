@@ -1,13 +1,15 @@
-import logo from './logo.svg';
-import './App.css';
-import { BrowserRouter, Link, Route, Switch } from 'react-router-dom';
-import Login from './pages/Login';
-import Navbar from './layout/Navbar';
-import Register from './pages/Register';
-import Gradebooks from './pages/Gradebooks';
-import PrivateRoute from './components/PrivateRoute';
-import PublicRoute from './components/PublicRoute';
-import { useState } from 'react';
+import logo from "./logo.svg";
+import "./App.css";
+import { BrowserRouter, Link, Route, Switch } from "react-router-dom";
+import Login from "./pages/Login";
+import Navbar from "./layout/Navbar";
+import Register from "./pages/Register";
+import Gradebooks from "./pages/Gradebooks";
+import PrivateRoute from "./components/PrivateRoute";
+import PublicRoute from "./components/PublicRoute";
+import { useState } from "react";
+import Teachers from "./pages/Teachers";
+import SingleTeacher from "./components/SingleTeacher";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(
@@ -16,14 +18,17 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Navbar isAuthenticated={isAuthenticated}/>
+        <Navbar isAuthenticated={isAuthenticated} />
         <Switch>
-        <PublicRoute exact path="/">
+          <PrivateRoute exact path="/">
             <Gradebooks />
-          </PublicRoute>
-          {/* <PrivateRoute exact path="/">
-            <Gradebooks />
-          </PrivateRoute> */}
+          </PrivateRoute>
+          <PrivateRoute exact path="/teachers">
+            <Teachers />
+          </PrivateRoute>
+          <PrivateRoute path="/teachers/:id">
+            <SingleTeacher />
+          </PrivateRoute>
           <PublicRoute path="/login">
             <Login
               onLogin={() => {
