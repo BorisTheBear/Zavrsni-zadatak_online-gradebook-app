@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import TeacherCard from '../components/TeacherCard';
 import teacherService from '../services/TeacherService';
 
@@ -8,10 +7,10 @@ const Teachers = () => {
     const [filterTerm, setFilterTerm] = useState("");
 
     useEffect(() => {
-        const fetchTeachers = () => { //ispred zagrada dodati async kad povezem sa apijem
-          const data = teacherService.teachersArray(); //ispred servisa dodati await
+        const fetchTeachers = async () => {
+          const data = await teacherService.getAll();
     
-          setTeachers(data); //ovde ide data.data u zagradi
+          setTeachers(data.data);
         }
         fetchTeachers();
       }, []);
