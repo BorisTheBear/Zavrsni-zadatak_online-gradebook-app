@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import gradebookService from "../services/GradebookService";
+import { format } from "date-fns";
 
 const Gradebooks = () => {
   const [gradebooks, setGradebooks] = useState([]);
   const [filterTerm, setFilterTerm] = useState("");
 
   useEffect(() => {
-    const fetchGradebooks = () => {
+    const fetchGradebooks = async () => {
       //ispred zagrada dodati async kad povezem sa apijem
-      const data = gradebookService.gradebookArray(); //ispred servisa dodati await
+      const data = await gradebookService.getAll(); //ispred servisa dodati await
 
-      setGradebooks(data); //ovde ide data.data u zagradi
+      setGradebooks(data.data); //ovde ide data.data u zagradi
     };
     fetchGradebooks();
   }, []);
@@ -22,7 +23,6 @@ const Gradebooks = () => {
 
   const handleFilterButton = (event) => {
     event.preventDefault();
-    console.log(filterTerm);
   };
 
   return (
@@ -54,7 +54,7 @@ const Gradebooks = () => {
               <Link to={`/teachers/${gradebook.id}`}>{gradebook.teacher}</Link>
             </p>
             <p>
-              <strong>Created at:</strong> {gradebook.created_at}
+              <strong>Created at:</strong> {format(new Date(gradebook.created_at), "dd-MM-yyyy")}
             </p>
             <hr />
           </div>

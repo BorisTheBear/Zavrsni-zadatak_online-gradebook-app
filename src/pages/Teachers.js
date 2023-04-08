@@ -22,8 +22,6 @@ const Teachers = () => {
     
       const handleFilterButton = (event) => {
         event.preventDefault();
-        console.log(filterTerm);
-        console.log(teacherService.get(3));
       }
   return (
     <div>

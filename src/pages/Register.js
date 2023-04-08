@@ -50,8 +50,6 @@ const Register = ({ onRegister }) => {
         history.push("/");
     } catch (err) {
         setResponseError(err);
-        console.log(responseError);
-        console.log(err);
     }
   };
   return (
