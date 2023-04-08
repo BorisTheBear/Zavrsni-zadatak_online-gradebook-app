@@ -66,3 +66,21 @@
   display: flex;
   gap: 1rem;
 }
+
+.filter {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.filter input {
+  width: 20rem;
+  height: 38px;
+}
+
+.teacher-img {
+  padding: 1rem;
+  width: 14rem;
+  height: 14rem;
+}

@@ -40,6 +40,13 @@ const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
               )}
               {isAuthenticated && (
                 <li className="nav-item">
+                  <h2 className="nav-link active" to="/">
+                    ONLINE GRADEBOOKS
+                  </h2>
+                </li>
+              )}
+              {isAuthenticated && (
+                <li className="nav-item">
                   <Link className="nav-link active" to="/">
                     Gradebooks
                   </Link>

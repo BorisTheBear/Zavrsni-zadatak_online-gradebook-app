@@ -8,26 +8,50 @@ const Register = ({ onRegister }) => {
     last_name: "",
     email: "",
     password: "",
-    password_confirmed: "",
+    password_confirmation: "",
     image_url: ""
   });
+
+  const [responseError, setResponseError] = useState({
+    response: {
+      data: {
+        errors: {
+          first_name: "",
+          last_name: "",
+          email: "",
+          password: "",
+          password_confirmation: "",
+          image_url: ""
+        }
+      }
+    }
+  });
+
+  const firstNameError = responseError.response.data.errors.first_name;
+  const lastNameError = responseError.response.data.errors.last_name;
+  const emailError = responseError.response.data.errors.email;
+  const passwordError = responseError.response.data.errors.password;
+  const confirmPasswordError = responseError.response.data.errors.password_confirmation;
+  const imgURLError = responseError.response.data.errors.image_url;
 
   const history = useHistory();
 
   const [agree, setAgree] = useState(false);
 
   const checkboxHandler = () => {
-    setAgree(!agree)
+    setAgree(!agree);
   }
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-        await authService.register(userData)
+        await authService.register(userData);
         onRegister();
         history.push("/");
-    } catch (error) {
-        alert("Enter all required fields");
+    } catch (err) {
+        setResponseError(err);
+        console.log(responseError);
+        console.log(err);
     }
   };
   return (
@@ -49,6 +73,10 @@ const Register = ({ onRegister }) => {
               required
             />
           </li>
+          {firstNameError ? 
+            <p style={{ color: "red" }}>{firstNameError}</p> :
+            <br />
+          }
           <li>
             <label htmlFor="last_name">Last name: </label>
             <br />
@@ -63,6 +91,10 @@ const Register = ({ onRegister }) => {
               required
             />
           </li>
+          {lastNameError ? 
+            <p style={{ color: "red" }}>{lastNameError}</p> :
+            <br />
+          }
           <li>
             <label htmlFor="email">Email: </label>
             <br />
@@ -77,6 +109,10 @@ const Register = ({ onRegister }) => {
               required
             />
           </li>
+          {emailError ? 
+            <p style={{ color: "red" }}>{emailError}</p> :
+            <br />
+          }
           <li>
             <label htmlFor="password">Password: </label>
             <br />
@@ -91,20 +127,28 @@ const Register = ({ onRegister }) => {
               required
             />
           </li>
+          {passwordError ? 
+            <p style={{ color: "red" }}>{passwordError}</p> :
+            <br />
+          }
           <li>
-            <label htmlFor="password_confirmed">Confirm password: </label>
+            <label htmlFor="password_confirmation">Confirm password: </label>
             <br />
             <input
-              id="password_confirmed"
+              id="password_confirmation"
               type="password"
               placeholder="Confirm password"
-              value={userData.password_confirmed}
+              value={userData.password_confirmation}
               onChange={({ target }) => {
-                setUserData({ ...userData, password_confirmed: target.value });
+                setUserData({ ...userData, password_confirmation: target.value });
               }}
               required
             />
           </li>
+          {confirmPasswordError ? 
+            <p style={{ color: "red" }}>{confirmPasswordError}</p> :
+            <br />
+          }
           <li>
             <label htmlFor="image_url">Image URL: </label>
             <br />
@@ -119,6 +163,10 @@ const Register = ({ onRegister }) => {
               required
             />
           </li>
+          {imgURLError ? 
+            <p style={{ color: "red" }}>{imgURLError}</p> :
+            <br />
+          }
           <li>
             <br />
             <label htmlFor="terms">I accept terms and conditions </label>
