@@ -68,7 +68,7 @@ const Gradebooks = () => {
       }) : "There are no gradebooks"}
       <br />
       {gradebooksData.gradebooks.current_page === gradebooksData.gradebooks.last_page ?
-        <button className="btn btn-warning" disabled>Load more</button> :
+        null :
         <button className="btn btn-warning" onClick={handleLoadMore}>Load more</button>
       }
     </div>
