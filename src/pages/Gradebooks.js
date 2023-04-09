@@ -2,19 +2,19 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import gradebookService from "../services/GradebookService";
 import { format } from "date-fns";
+import { useDispatch, useSelector } from "react-redux";
+import { gradebooksSelector } from "../store/gradebook/selector";
+import { performGetAllGradebooks } from "../store/gradebook/slice";
 
 const Gradebooks = () => {
-  const [gradebooks, setGradebooks] = useState([]);
   const [filterTerm, setFilterTerm] = useState("");
 
-  useEffect(() => {
-    const fetchGradebooks = async () => {
-      //ispred zagrada dodati async kad povezem sa apijem
-      const data = await gradebookService.getAll(); //ispred servisa dodati await
+  const dispatch = useDispatch();
 
-      setGradebooks(data.data); //ovde ide data.data u zagradi
-    };
-    fetchGradebooks();
+  const gradebooksData = useSelector(gradebooksSelector);
+
+  useEffect(() => {
+    dispatch(performGetAllGradebooks({page: 1, name: filterTerm}));
   }, []);
 
   const handleFilterBar = (event) => {
@@ -23,7 +23,13 @@ const Gradebooks = () => {
 
   const handleFilterButton = (event) => {
     event.preventDefault();
+    dispatch(performGetAllGradebooks({page: 1, name: filterTerm}));
   };
+
+  const handleLoadMore = () => {
+    const nextPage = gradebooksData.gradebooks.current_page + 1;
+    dispatch(performGetAllGradebooks({page: nextPage, name: filterTerm}));
+  }
 
   return (
     <div>
@@ -42,7 +48,7 @@ const Gradebooks = () => {
         </button>
       </form>
       <hr />
-      {gradebooks.map((gradebook) => {
+      {gradebooksData.gradebooks.data ? gradebooksData.gradebooks.data.map((gradebook) => {
         return (
           <div key={gradebook.id}>
             <p>
@@ -59,7 +65,12 @@ const Gradebooks = () => {
             <hr />
           </div>
         );
-      })}
+      }) : "There are no gradebooks"}
+      <br />
+      {gradebooksData.gradebooks.current_page === gradebooksData.gradebooks.last_page ?
+        <button className="btn btn-warning" disabled>Load more</button> :
+        <button className="btn btn-warning" onClick={handleLoadMore}>Load more</button>
+      }
     </div>
   );
 };

@@ -6,11 +6,9 @@ class TeacherService extends HttpService {
         return data;
     }
 
-    get(id) { //dodati async ispred get
-        // const { data } = await this.client.get(`teachers/${id}`);
-        // return data;
-        const teachers = this.teachersArray();
-        return teachers.find(teacher => teacher.id = id);
+    async get(id) {
+        const { data } = await this.client.get(`teachers/${id}`);
+        return data;
     }
 
     teachersArray() {
