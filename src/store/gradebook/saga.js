@@ -13,8 +13,8 @@ function* getAllGradebooksHandler(action) {
 
 function* getSingleGradebookHandler(action) {
     try {
-        const data = yield call(gradebookService.get, action.payload);
-        yield put(setSingleGradebook(data));
+        const gradebook = yield call([gradebookService, gradebookService.get], action.payload);
+        yield put(setSingleGradebook(gradebook));
     } catch (error) {
         console.log('error: ', error);
     }

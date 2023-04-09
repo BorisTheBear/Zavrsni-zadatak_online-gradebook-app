@@ -4,7 +4,7 @@ import { setTeachers, setSingleTeacher, performGetAllTeachers, performGetSingleT
 
 function* getAllTeachersHandler(action) {
     try {
-        const data = yield call(teacherService.getAll, action.payload);
+        const data = yield call([teacherService, teacherService.getAll], action.payload);
         yield put(setTeachers(data));
     } catch (error) {
         console.log('error: ', error);
@@ -13,8 +13,8 @@ function* getAllTeachersHandler(action) {
 
 function* getSingleTeacherHandler(action) {
     try {
-        const data = yield call(teacherService.get, action.payload);
-        yield put(setSingleTeacher(data));
+        const teacher = yield call([teacherService, teacherService.get], action.payload);
+        yield put(setSingleTeacher(teacher));
     } catch (error) {
         console.log('error: ', error);
     }

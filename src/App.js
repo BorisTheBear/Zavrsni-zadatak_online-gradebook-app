@@ -10,6 +10,7 @@ import PublicRoute from "./components/PublicRoute";
 import { useState } from "react";
 import Teachers from "./pages/Teachers";
 import SingleTeacher from "./components/SingleTeacher";
+import SingleGradebook from "./components/SingleGradebook";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(
@@ -28,6 +29,9 @@ function App() {
           </PrivateRoute>
           <PrivateRoute path="/teachers/:id">
             <SingleTeacher />
+          </PrivateRoute>
+          <PrivateRoute path="/gradebooks/:id">
+            <SingleGradebook />
           </PrivateRoute>
           <PublicRoute path="/login">
             <Login

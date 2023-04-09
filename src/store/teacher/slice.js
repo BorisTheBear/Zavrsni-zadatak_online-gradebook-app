@@ -16,7 +16,7 @@ const teachersSlice = createSlice({
             state.data = action.payload.data;
         },
         setSingleTeacher: (state, action) => {
-            state.single_gradebook = action.payload;
+            state.single_teacher = action.payload;
         },
         ...middlewareActions
     }
