@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import TeacherCard from '../components/TeacherCard';
 import teacherService from '../services/TeacherService';
+import { useDispatch, useSelector } from 'react-redux';
+import { teachersSelector } from '../store/teacher/selector';
+import { performGetAllTeachers } from '../store/teacher/slice';
 
 const Teachers = () => {
-    const [teachers, setTeachers] = useState([]);
     const [filterTerm, setFilterTerm] = useState("");
 
+    const dispatch = useDispatch();
+
+    const teachersData = useSelector(teachersSelector);
+
     useEffect(() => {
-        const fetchTeachers = async () => {
-          const data = await teacherService.getAll();
-    
-          setTeachers(data.data);
-        }
-        fetchTeachers();
-      }, []);
+      dispatch(performGetAllTeachers({ name: filterTerm, lastName: filterTerm }));
+    }, []);
     
       const handleFilterBar = (event) => {
         setFilterTerm(event.target.value);
@@ -21,7 +22,13 @@ const Teachers = () => {
     
       const handleFilterButton = (event) => {
         event.preventDefault();
+        dispatch(performGetAllTeachers({ name: filterTerm, lastName: filterTerm }));
       }
+  if(!teachersData) {
+    return <div>
+      <h1>Loading...</h1>
+    </div>
+  }
   return (
     <div>
       <h2>Professors</h2>
@@ -40,7 +47,7 @@ const Teachers = () => {
         <div className="album py-5 bg-body-tertiary">
             <div className="container">
                 <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                    {teachers.map((teacher) => {
+                    {teachersData.map((teacher) => {
                         return (
                             <div className="col" key={teacher.id}>
                                 <TeacherCard teacher={teacher} />

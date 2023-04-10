@@ -40,7 +40,7 @@ const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
               )}
               {isAuthenticated && (
                 <li className="nav-item">
-                  <h2 className="nav-link active" to="/">
+                  <h2 className="nav-link active">
                     ONLINE GRADEBOOKS
                   </h2>
                 </li>
@@ -69,7 +69,7 @@ const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
               {isAuthenticated && (
                 <li className="nav-item">
                   <Link className="nav-link active" to="/gradebooks/create">
-                    Add Gradebook
+                    Create Gradebook
                   </Link>
                 </li>
               )}

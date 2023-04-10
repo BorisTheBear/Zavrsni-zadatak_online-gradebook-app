@@ -14,7 +14,9 @@ if(!teacher.gradebook) {
             <img className="bd-placeholder-img card-img-top" width="100%" height="225" src={`${teacher.image_url}`} role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"></img>
             <div className="card-body">
                 <p className="card-text">Name: {teacher.first_name} {teacher.last_name}</p>
+                {teacher.gradebook ?
                 <p className="card-text">Gradebook: {teacher.gradebook.name}</p>
+                : <p>Professor is available</p>}
                     <div className="d-flex justify-content-between align-items-center">
                         <div className="btn-group">
                             <Link to={`/teachers/${teacher.id}`}>

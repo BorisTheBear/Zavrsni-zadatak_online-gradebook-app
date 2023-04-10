@@ -26,8 +26,8 @@ const SingleTeacher = () => {
     <div>
       <img src={teacher.image_url} alt="Image" className="teacher-img"></img>
       <p>Full name: {teacher.first_name} {teacher.last_name}</p>
-      <p>Gradebook: <Link to="">{teacher.gradebook.name}</Link></p>
-      <p>Broj ucenika treba da odradim tek, to povlaci iz dnevnika</p>
+      <p>Gradebook: <Link to={`/gradebooks/${teacher.gradebook.id}`}>{teacher.gradebook.name}</Link></p>
+      <p>Number of students: {}</p>
       <button type="button" className="btn btn-warning" onClick={() => {history.goBack()}}>Back</button>
     </div>
   )

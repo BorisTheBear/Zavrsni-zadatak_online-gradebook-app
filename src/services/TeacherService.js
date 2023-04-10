@@ -1,9 +1,10 @@
 import HttpService from "./HttpService";
 
 class TeacherService extends HttpService {
-    async getAll() {
-        const { data } = await this.client.get('/teachers');
-        return data;
+    async getAll({name, lastName}) {
+        const params = new URLSearchParams([['first_name', name], ['last_name', lastName]]);
+        const { data } = await this.client.get('/teachers', {params});
+        return {...data, searchTerm: name};
     }
 
     async get(id) {

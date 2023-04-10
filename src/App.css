@@ -84,3 +84,7 @@
   width: 14rem;
   height: 14rem;
 }
+
+.li-no-bullets {
+  list-style-type: none;
+}
