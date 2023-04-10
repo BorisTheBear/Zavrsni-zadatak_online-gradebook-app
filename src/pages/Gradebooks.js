@@ -33,7 +33,7 @@ const Gradebooks = () => {
   };
 
   const handleLoadMore = () => {
-    const nextPage = gradebooksData.gradebooks.current_page + 1;
+    const nextPage = gradebooksData.current_page + 1;
     dispatch(performGetAllGradebooks({ page: nextPage, name: filterTerm }));
   };
 
@@ -54,8 +54,8 @@ const Gradebooks = () => {
         </button>
       </form>
       <hr />
-      {gradebooksData.gradebooks.data
-        ? gradebooksData.gradebooks.data.map((gradebook) => {
+      {gradebooksData.data
+        ? gradebooksData.data.map((gradebook) => {
             return (
               <div key={gradebook.id}>
                 <p>
@@ -66,9 +66,11 @@ const Gradebooks = () => {
                 </p>
                 <p>
                   <strong>Teacher:</strong>{" "}
+                  {gradebook.user ?
                   <Link to={`/teachers/${gradebook.id}`}>
                     {gradebook.user.first_name} {gradebook.user.last_name}
                   </Link>
+                  : "No teacher assigned"}
                 </p>
                 <p>
                   <strong>Created at:</strong>{" "}
@@ -80,8 +82,8 @@ const Gradebooks = () => {
           })
         : "There are no gradebooks"}
       <br />
-      {gradebooksData.gradebooks.current_page ===
-      gradebooksData.gradebooks.last_page ? null : (
+      {gradebooksData.current_page ===
+      gradebooksData.last_page ? null : (
         <button className="btn btn-warning" onClick={handleLoadMore}>
           Load more
         </button>
