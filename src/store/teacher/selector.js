@@ -1,6 +1,7 @@
 export const teachersSelector = (state) => {
-    return {
-        teachers: state.teachers.data,
-        single_teacher: state.teachers.single_teacher
-    }
+    return state.teachers.data;
+}
+
+export const singleTeacherSelector = (state) => {
+    return state.teachers.single_teacher;
 }

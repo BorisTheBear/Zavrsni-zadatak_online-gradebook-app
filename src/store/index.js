@@ -2,7 +2,7 @@ import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import teachersReducer from "./teacher/slice";
 import gradebooksReducer from "./gradebook/slice";
 import createSagaMiddleware from "@redux-saga/core";
-import { watchGetAllGradebooks, watchGetSingleGradebook } from "./gradebook/saga";
+import { watchGetAllGradebooks, watchGetSingleGradebook, watchResetGradebookState } from "./gradebook/saga";
 import { watchGetAllTeachers, watchGetSingleTeacher } from "./teacher/saga";
 
 const sagaMiddleware = createSagaMiddleware();
@@ -24,5 +24,6 @@ sagaMiddleware.run(watchGetAllGradebooks);
 sagaMiddleware.run(watchGetSingleGradebook);
 sagaMiddleware.run(watchGetAllTeachers);
 sagaMiddleware.run(watchGetSingleTeacher);
+sagaMiddleware.run(watchResetGradebookState);
 
 export default store;
