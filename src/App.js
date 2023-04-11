@@ -22,20 +22,17 @@ function App() {
       <BrowserRouter>
         <Navbar isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
         <Switch>
-          <PrivateRoute exact path="/">
-            <Gradebooks />
-          </PrivateRoute>
           <PrivateRoute exact path="/teachers">
             <Teachers />
           </PrivateRoute>
           <PrivateRoute path="/teachers/:id">
             <SingleTeacher />
           </PrivateRoute>
-          <PrivateRoute exact path="/gradebooks/:id">
-            <SingleGradebook />
-          </PrivateRoute>
           <PrivateRoute exact path="/gradebooks/create">
             <CreateGradebook />
+          </PrivateRoute>
+          <PrivateRoute exact path="/gradebooks/:id">
+            <SingleGradebook />
           </PrivateRoute>
           <PublicRoute path="/login">
             <Login
@@ -51,6 +48,9 @@ function App() {
               }}
             />
           </PublicRoute>
+          <PrivateRoute path="/">
+            <Gradebooks />
+          </PrivateRoute>
         </Switch>
       </BrowserRouter>
     </div>
