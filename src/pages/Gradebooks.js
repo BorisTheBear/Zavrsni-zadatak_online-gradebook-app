@@ -15,6 +15,7 @@ const Gradebooks = () => {
   const dispatch = useDispatch();
 
   const gradebooksData = useSelector(gradebooksSelector);
+  console.log(gradebooksData)
 
   useEffect(() => {
     dispatch(performGetAllGradebooks({ page: 1, name: filterTerm }));
@@ -67,7 +68,7 @@ const Gradebooks = () => {
                 <p>
                   <strong>Teacher:</strong>{" "}
                   {gradebook.user ?
-                  <Link to={`/teachers/${gradebook.id}`}>
+                  <Link to={`/teachers/${gradebook.user.id}`}>
                     {gradebook.user.first_name} {gradebook.user.last_name}
                   </Link>
                   : "No teacher assigned"}
