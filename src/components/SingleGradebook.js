@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 import { performGetSingleGradebook } from '../store/gradebook/slice';
 import { useState } from 'react';
 import teacherService from '../services/TeacherService';
+import gradebookService from '../services/GradebookService';
 
 const SingleGradebook = () => {
     const [me, setMe] = useState({});
@@ -25,15 +26,34 @@ const SingleGradebook = () => {
       fetchMe();
     }, []);
 
+    const handleDelete = async (id) => {
+      await gradebookService.delete(id);
+      history.push('/');
+  }
+
   return (
     <div>
       {me.id === gradebook.user_id ?
-      <button
-      type="button" 
-      className="btn btn-warning add-student" 
-      onClick={() => {history.push(`/gradebooks/${me.gradebook.id}/students/create`)}}>
-      Add student
-      </button>
+      <div>
+        <button
+        type="button" 
+        className="btn btn-warning add-student" 
+        onClick={() => {history.push(`/gradebooks/${me.gradebook.id}/students/create`)}}>
+        Add student
+        </button>
+        <button
+        type="button" 
+        className="btn btn-warning add-student" 
+        onClick={() => {history.push(`/gradebooks/${me.gradebook.id}/edit`)}}>
+        Edit
+        </button>
+        <button
+        type="button" 
+        className="btn btn-danger add-student" 
+        onClick={() => {handleDelete(me.gradebook.id)}}>
+        Delete
+        </button>
+      </div>
       : null}
       <h3>Gradebook: {gradebook.name}</h3>
       {gradebook.user ?

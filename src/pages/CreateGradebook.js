@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { teachersSelector } from '../store/teacher/selector';
 import { useEffect } from 'react';
 import { performGetAllTeachers } from '../store/teacher/slice';
@@ -26,6 +26,8 @@ const CreateGradebook = () => {
     const userIdError = responseError.response.data.errors.user_id;
 
     const history = useHistory();
+    const params = useParams();
+    const gradebookId = parseInt(params.id);
     const dispatch = useDispatch();
     const teachers = useSelector(teachersSelector);
 
@@ -33,19 +35,40 @@ const CreateGradebook = () => {
       dispatch(performGetAllTeachers());
     }, []);
 
+    useEffect(() => {
+      const fetchGradebook = async () => {
+        const data = await gradebookService.get(gradebookId);
+        setInputData({...inputData, name: data.name, user_id: data.user.id});
+      };
+      if(gradebookId) {
+        fetchGradebook();
+      }
+    }, [gradebookId]);
+
     const handleSubmit = async (event) => {
       event.preventDefault();
-      try {
-          await gradebookService.create(inputData);
-          history.push("/");
-      } catch (err) {
+      let data = null;
+
+      if(gradebookId){
+        try {
+          data = await gradebookService.edit(gradebookId, inputData);
+          history.push(`gradebooks/${data.id}`);
+        } catch (err) {
           setResponseError(err);
+        }
+      } else {
+        try {
+            await gradebookService.create(inputData);
+            history.push("/");
+        } catch (err) {
+            setResponseError(err);
+        }
       }
     };
 
   return (
     <div>
-      <h2>Create new gradebook</h2>
+      <h2>{gradebookId ? "Edit gradebook" : "Create new gradebook"}</h2>
       <br />
       <form onSubmit={handleSubmit} className="form">
         <ul>
@@ -91,7 +114,7 @@ const CreateGradebook = () => {
               className="btn btn-warning"
               onClick={handleSubmit}
             >
-              Create
+              {gradebookId ? "Save" : "Create"}
             </button>
             &nbsp;&nbsp;
             <button

@@ -21,6 +21,16 @@ class GradebookService extends HttpService {
         const { data } = await this.client.post('/students', newStudent);
         return data;
     }
+
+    async edit(id, gradebook) {
+        const { data } = await this.client.put(`gradebooks/${id}`, gradebook);
+        return data;
+    }
+
+    async delete(id) {
+        const { data } = await this.client.delete(`gradebooks/${id}`);
+        return data;
+    }
 }
 
 const gradebookService = new GradebookService();

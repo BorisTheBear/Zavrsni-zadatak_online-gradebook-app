@@ -91,6 +91,8 @@
 
 .add-student {
   margin-top: 1rem;
-  margin-left: 2rem;
-  display: flex;
+  margin-left: 1rem;
+  display: inline-block;
+  position: relative;
+  left: -23rem;
 }

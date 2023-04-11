@@ -38,6 +38,9 @@ function App() {
           <PrivateRoute exact path="/gradebooks/:id/students/create">
             <AddStudent />
           </PrivateRoute>
+          <PrivateRoute exact path="/gradebooks/:id/edit">
+            <CreateGradebook />
+          </PrivateRoute>
           <PrivateRoute exact path="/gradebooks/:id">
             <SingleGradebook />
           </PrivateRoute>
