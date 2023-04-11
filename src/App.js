@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "./App.css";
 import { BrowserRouter, Link, Route, Switch } from "react-router-dom";
 import Login from "./pages/Login";
@@ -13,6 +12,7 @@ import SingleTeacher from "./components/SingleTeacher";
 import SingleGradebook from "./components/SingleGradebook";
 import CreateGradebook from "./pages/CreateGradebook";
 import MyGradebook from "./components/MyGradebook";
+import AddStudent from "./pages/AddStudent";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(
@@ -34,6 +34,9 @@ function App() {
           </PrivateRoute>
           <PrivateRoute exact path="/gradebooks/create">
             <CreateGradebook />
+          </PrivateRoute>
+          <PrivateRoute exact path="/gradebooks/:id/students/create">
+            <AddStudent />
           </PrivateRoute>
           <PrivateRoute exact path="/gradebooks/:id">
             <SingleGradebook />

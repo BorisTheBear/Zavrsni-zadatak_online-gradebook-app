@@ -17,10 +17,15 @@ const SingleTeacher = () => {
     }, [])
 
     if(!teacher.gradebook) {
-      return <div>
-        <h1>Loading...</h1>
+      return (
+      <div>
+      <img src={teacher.image_url} alt="Image" className="teacher-img"></img>
+      <p>Full name: {teacher.first_name} {teacher.last_name}</p>
+      <p>Gradebook: No gradebook, professor available</p>
+      <p>Number of students: N/A</p>
+      <button type="button" className="btn btn-warning" onClick={() => {history.goBack()}}>Back</button>
       </div>
-    }
+    )}
 
   return (
     <div>
