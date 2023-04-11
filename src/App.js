@@ -12,6 +12,7 @@ import Teachers from "./pages/Teachers";
 import SingleTeacher from "./components/SingleTeacher";
 import SingleGradebook from "./components/SingleGradebook";
 import CreateGradebook from "./pages/CreateGradebook";
+import MyGradebook from "./components/MyGradebook";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(
@@ -22,6 +23,9 @@ function App() {
       <BrowserRouter>
         <Navbar isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
         <Switch>
+        <PrivateRoute exact path="/my-gradebook">
+            <MyGradebook />
+          </PrivateRoute>
           <PrivateRoute exact path="/teachers">
             <Teachers />
           </PrivateRoute>

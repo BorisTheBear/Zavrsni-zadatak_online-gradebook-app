@@ -88,3 +88,9 @@
 .li-no-bullets {
   list-style-type: none;
 }
+
+.add-student {
+  margin-top: 1rem;
+  margin-left: 2rem;
+  display: flex;
+}

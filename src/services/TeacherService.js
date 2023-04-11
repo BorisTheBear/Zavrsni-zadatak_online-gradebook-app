@@ -13,7 +13,6 @@ class TeacherService extends HttpService {
 
     async getMe() {
         const { data } = await this.client.get('/me');
-        console.log(data)
         return data;
     }
 }
