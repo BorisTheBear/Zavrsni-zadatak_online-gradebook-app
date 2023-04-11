@@ -15,7 +15,6 @@ const Gradebooks = () => {
   const dispatch = useDispatch();
 
   const gradebooksData = useSelector(gradebooksSelector);
-  console.log(gradebooksData)
 
   useEffect(() => {
     dispatch(performGetAllGradebooks({ page: 1, name: filterTerm }));
