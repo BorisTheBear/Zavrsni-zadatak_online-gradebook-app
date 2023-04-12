@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { teachersSelector } from '../store/teacher/selector';
 import { useEffect } from 'react';
-import { performGetAllTeachers } from '../store/teacher/slice';
+import { performGetTeachersForSelectList } from '../store/teacher/slice';
 import gradebookService from '../services/GradebookService';
 
 const CreateGradebook = () => {
@@ -32,7 +32,7 @@ const CreateGradebook = () => {
     const teachers = useSelector(teachersSelector);
 
     useEffect(() => {
-      dispatch(performGetAllTeachers());
+      dispatch(performGetTeachersForSelectList());
     }, []);
 
     useEffect(() => {

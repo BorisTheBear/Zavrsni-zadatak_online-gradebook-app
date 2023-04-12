@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const middlewareActions = {
     performGetAllTeachers: () => {},
-    performGetSingleTeacher: () => {}
+    performGetSingleTeacher: () => {},
+    performGetTeachersForSelectList: () => {}
 }
 
 const teachersSlice = createSlice({
@@ -22,5 +23,5 @@ const teachersSlice = createSlice({
     }
 });
 
-export const { setTeachers, setSingleTeacher, performGetAllTeachers, performGetSingleTeacher } = teachersSlice.actions;
+export const { setTeachers, setSingleTeacher, performGetAllTeachers, performGetSingleTeacher, performGetTeachersForSelectList } = teachersSlice.actions;
 export default teachersSlice.reducer;

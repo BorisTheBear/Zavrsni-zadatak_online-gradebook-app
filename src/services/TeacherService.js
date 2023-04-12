@@ -18,6 +18,11 @@ class TeacherService extends HttpService {
         const { data } = await this.client.get('/me');
         return data;
     }
+
+    async getTeachersForSelectList() {
+        const { data } = await this.client.get('/teachers/all');
+        return data;
+    }
 }
 
 const teacherService = new TeacherService();
