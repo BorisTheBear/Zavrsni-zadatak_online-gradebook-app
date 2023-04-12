@@ -1,8 +1,11 @@
 import HttpService from "./HttpService";
 
 class TeacherService extends HttpService {
-    async getAll() {
-        const { data } = await this.client.get('/teachers');
+    async getAll({page, name}) {
+        const params = new URLSearchParams();
+        params.set('page', page);
+        params.set('name', name);
+        const { data } = await this.client.get('/teachers', {params});
         return data;
     }
 

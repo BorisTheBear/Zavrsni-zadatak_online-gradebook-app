@@ -13,7 +13,7 @@ const Teachers = () => {
     const teachersData = useSelector(teachersSelector);
 
     useEffect(() => {
-      dispatch(performGetAllTeachers({ name: filterTerm, lastName: filterTerm }));
+      dispatch(performGetAllTeachers({ page: 1, name: filterTerm }));
     }, []);
     
       const handleFilterBar = (event) => {
@@ -22,7 +22,7 @@ const Teachers = () => {
     
       const handleFilterButton = (event) => {
         event.preventDefault();
-        dispatch(performGetAllTeachers({ name: filterTerm, lastName: filterTerm }));
+        dispatch(performGetAllTeachers({ page: 1, name: filterTerm }));
       }
   if(!teachersData) {
     return <div>

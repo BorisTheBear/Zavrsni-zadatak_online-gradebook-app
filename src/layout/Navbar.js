@@ -1,12 +1,16 @@
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
 import authService from "../services/AuthService";
+import { useDispatch } from "react-redux";
+import { resetGradebooksState } from "../store/gradebook/slice";
 
 const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const handleLogout = async () => {
     const response = await authService.logout();
+    dispatch(resetGradebooksState());
     setIsAuthenticated(false);
     history.push("/login");
   };
