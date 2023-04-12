@@ -38,7 +38,11 @@ const CreateGradebook = () => {
     useEffect(() => {
       const fetchGradebook = async () => {
         const data = await gradebookService.get(gradebookId);
+        if(data.user){
         setInputData({...inputData, name: data.name, user_id: data.user.id});
+        } else {
+          setInputData({...inputData, name: data.name, user_id: ""});
+        }
       };
       if(gradebookId) {
         fetchGradebook();
@@ -93,7 +97,7 @@ const CreateGradebook = () => {
           <li>
             <label htmlFor="prof">Select professor:</label>
             <br />
-            <select id="prof" value="" onChange={({ target }) => {setInputData({...inputData, user_id: target.value})}}>
+            <select id="prof" value={inputData.user_id} onChange={({ target }) => {setInputData({...inputData, user_id: target.value})}}>
               <option value="">---Select professor---</option>
               {teachers.map((teacher) => {
                 if(!teacher.gradebook) {

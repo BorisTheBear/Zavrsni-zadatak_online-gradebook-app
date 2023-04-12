@@ -55,6 +55,16 @@ const SingleGradebook = () => {
         </button>
       </div>
       : null}
+      {!gradebook.user ? 
+      <div>
+        <button
+        type="button" 
+        className="btn btn-warning add-student" 
+        onClick={() => {history.push(`/gradebooks/${gradebook.id}/edit`)}}>
+        Edit
+        </button>
+      </div>
+      : null}
       <h3>Gradebook: {gradebook.name}</h3>
       {gradebook.user ?
       <h5>Teacher: {gradebook.user.first_name} {gradebook.user.last_name}</h5>
